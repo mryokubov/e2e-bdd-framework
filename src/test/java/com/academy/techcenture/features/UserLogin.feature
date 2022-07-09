@@ -9,4 +9,5 @@ Feature: User login and logout functionality
     And user should be navigated to account page
     Then user should be able to see "Kevin Lee" name on top
     And user clicks on sing out link
+
     Then user should be navigated to login screen

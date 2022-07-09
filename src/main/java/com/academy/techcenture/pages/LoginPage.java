@@ -79,6 +79,12 @@ public class LoginPage extends HomePage{
     }
 
 
+    public void login(){
+        enterUserName();
+        enterPassword();
+        clickOnLoginBtn();
+    }
+
 
 
     public void enterRandomEmail(){
