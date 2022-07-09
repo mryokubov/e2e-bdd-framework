@@ -1,5 +1,7 @@
 package com.academy.techcenture.step_definitions;
 
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -17,10 +19,15 @@ public class GoogleSearchStepDefinitions {
 
     private WebDriver driver;
 
-    @Given("user goes to google search page")
-    public void user_goes_to_google_search_page() {
+    @Before
+    public void setUp(){
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
+    }
+
+    @Given("user goes to google search page")
+    public void user_goes_to_google_search_page() {
+
         driver.get("https://www.google.com");
         String  googleTitle = driver.getTitle();
         Assert.assertEquals("Titles don't match", "Google", googleTitle);
@@ -59,5 +66,12 @@ public class GoogleSearchStepDefinitions {
         Assert.assertTrue(missionStatement.isDisplayed());
         Assert.assertEquals("Mission statement does not match", missionStatement.getText().trim(), "Our mission is to organize the world’s information and make it universally accessible and useful.");
 
+    }
+
+    @After
+    public void cleanUp(){
+        if (driver != null){
+            driver.quit();
+        }
     }
 }
