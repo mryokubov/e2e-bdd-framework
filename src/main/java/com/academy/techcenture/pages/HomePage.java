@@ -2,11 +2,17 @@ package com.academy.techcenture.pages;
 
 import com.academy.techcenture.config.ConfigReader;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 import static org.junit.Assert.*;
+
+import java.time.Duration;
 import java.util.List;
 import java.util.Map;
 
@@ -47,10 +53,13 @@ public class HomePage extends BasePage{
     @FindBy(xpath = "//img[contains(@class,'logo')]")
     private WebElement logo;
 
-    public void clickSingInLink() {
+    public void clickSingInLink() throws InterruptedException {
         assertTrue("Sign in link was not displayed", signInLink.isEnabled());
         actions.click(signInLink).perform();
-   //     signInLink.click();
+
+      //  signInLink.click();
+
+        Thread.sleep(3000);
         wait.until(ExpectedConditions.titleIs("Login - My Store"));
     }
 

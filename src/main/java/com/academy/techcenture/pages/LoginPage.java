@@ -5,6 +5,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.util.Map;
+
 import static org.junit.Assert.*;
 
 public class LoginPage extends HomePage{
@@ -59,17 +63,17 @@ public class LoginPage extends HomePage{
     private WebElement loginForm;
 
 
-    public void enterUserName(){
+    public void enterUserName(String username){
         assertTrue( "Email label was not dipslayed", emailLabel.isDisplayed());
         emailInput.clear();
-        emailInput.sendKeys(ConfigReader.getProperty("username"));
+        emailInput.sendKeys(username);
     }
 
-    public void enterPassword(){
+    public void enterPassword(String password){
         assertTrue("Forgot passwd is not displayed",forgotPswdLink.isDisplayed());
         assertTrue( "Password label was not dipslayed", passwdLabel.isDisplayed());
         passwdInput.clear();
-        passwdInput.sendKeys(ConfigReader.getProperty("password"));
+        passwdInput.sendKeys(password);
     }
 
     public void clickOnLoginBtn(){
@@ -77,14 +81,6 @@ public class LoginPage extends HomePage{
         assertTrue( "Login Btn is not enabled",loginBtn.isEnabled());
         loginBtn.click();
     }
-
-
-    public void login(){
-        enterUserName();
-        enterPassword();
-        clickOnLoginBtn();
-    }
-
 
 
     public void enterRandomEmail(){
@@ -95,11 +91,17 @@ public class LoginPage extends HomePage{
     }
 
     public void verifyUserIsOnLoginPage(){
-
         String loginTitle = driver.getTitle();
         assertEquals("Titles are not matching","Login - My Store", loginTitle);
         assertTrue("Login Header was not displayed", loginHeaderTxt.isDisplayed() );
         assertTrue("Login form is not there", loginForm.isDisplayed());
+    }
+
+    public void verifyLoginErrors(String errorMessage) {
+        WebElement errorMsg = driver.findElement(By.xpath("//div[contains(@class,'alert-danger')]//li"));
+        System.out.println(errorMsg.getText());
+        wait.until(ExpectedConditions.visibilityOf(errorMsg));
+        assertTrue("Error Message is not correct", errorMsg.getText().equals(errorMessage));
     }
 
 }

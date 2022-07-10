@@ -9,8 +9,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = "src/test/java/com/academy/techcenture/features",
         glue = {"com/academy/techcenture/step_definitions"},
-        tags = {"@regression"}
+        tags = {"@all or @dummy"}
 )
-public class RegressionTestRunner {
-
+public class DummyRunner {
 }

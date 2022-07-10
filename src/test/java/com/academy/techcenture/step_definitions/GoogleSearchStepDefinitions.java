@@ -52,7 +52,6 @@ public class GoogleSearchStepDefinitions {
 
     }
 
-
     @When("clicks on about link on top right")
     public void clicksOnAboutLinkOnTopRight() {
         WebElement aboutLnk = driver.findElement(By.xpath("//a[text()='About']"));
@@ -74,4 +73,5 @@ public class GoogleSearchStepDefinitions {
             driver.quit();
         }
     }
+
 }

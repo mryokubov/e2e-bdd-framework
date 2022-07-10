@@ -34,7 +34,7 @@ public class UserLoginStepDefinitions {
     }
 
     @When("user clicks on sign in link")
-    public void user_clicks_on_sign_in_link() {
+    public void user_clicks_on_sign_in_link() throws InterruptedException {
         homePage.clickSingInLink();
     }
 
@@ -43,10 +43,10 @@ public class UserLoginStepDefinitions {
         loginPage.verifyUserIsOnLoginPage();
     }
 
-    @And("user enters valid username and password in the credential inputs")
-    public void userEntersCredentials() {
-        loginPage.enterUserName();
-        loginPage.enterPassword();
+    @And("user enters {string} and {string}")
+    public void userEntersCredentials(String username, String password) {
+        loginPage.enterUserName(username);
+        loginPage.enterPassword(password);
     }
 
     @When("user clicks on login button")
@@ -68,6 +68,15 @@ public class UserLoginStepDefinitions {
     @And("user clicks on sing out link")
     public void userClicksOnSingOutLink() {
         userAccountPage.signOut();
+    }
+
+
+    @And("user enters {string} and {string} and clicks on login button and should see {string}")
+    public void userEntersAndAndClicksOnLoginButtonAndShouldSee(String username, String password, String errorMessage) {
+        loginPage.enterUserName(username);
+        loginPage.enterPassword(password);
+        loginPage.clickOnLoginBtn();
+        loginPage.verifyLoginErrors(errorMessage);
     }
 
 
